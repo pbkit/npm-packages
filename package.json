@@ -1,0 +1,11 @@
+{
+  "name": "@pbkit/nodejs-packages",
+  "private": true,
+  "packageManager": "yarn@3.0.2",
+  "workspaces": [
+    "grpc-web-client"
+  ],
+  "devDependencies": {
+    "typescript": "^4.4.3"
+  }
+}
