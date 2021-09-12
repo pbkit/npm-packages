@@ -1,5 +1,5 @@
 {
-  "name": "@pbkit/nodejs-packages",
+  "name": "@pbkit/npm-packages",
   "private": true,
   "packageManager": "yarn@3.0.2",
   "workspaces": [

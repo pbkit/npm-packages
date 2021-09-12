@@ -19,7 +19,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     ],
     "dependencyTreeRoots": [
       {
-        "name": "@pbkit/nodejs-packages",
+        "name": "@pbkit/npm-packages",
         "reference": "workspace:."
       },
       {
@@ -31,7 +31,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "ignorePatternData": "(^(?:\\.yarn\\/sdks(?:\\/(?!\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?)|$))$)",
     "fallbackExclusionList": [
       ["@pbkit/grpc-web-client", ["workspace:grpc-web-client"]],
-      ["@pbkit/nodejs-packages", ["workspace:."]]
+      ["@pbkit/npm-packages", ["workspace:."]]
     ],
     "fallbackPool": [
     ],
@@ -81,11 +81,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "SOFT",
         }]
       ]],
-      ["@pbkit/nodejs-packages", [
+      ["@pbkit/npm-packages", [
         ["workspace:.", {
           "packageLocation": "./",
           "packageDependencies": [
-            ["@pbkit/nodejs-packages", "workspace:."],
+            ["@pbkit/npm-packages", "workspace:."],
             ["typescript", "patch:typescript@npm%3A4.4.3#~builtin<compat/typescript>::version=4.4.3&hash=32657b"]
           ],
           "linkType": "SOFT",

@@ -27,9 +27,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@pbkit/nodejs-packages@workspace:.":
+"@pbkit/npm-packages@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@pbkit/nodejs-packages@workspace:."
+  resolution: "@pbkit/npm-packages@workspace:."
   dependencies:
     typescript: ^4.4.3
   languageName: unknown

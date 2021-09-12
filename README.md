@@ -1,1 +1,1 @@
-# @pbkit/nodejs-packages
+# @pbkit/npm-packages
