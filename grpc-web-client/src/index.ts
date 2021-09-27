@@ -1,4 +1,4 @@
-import type { RpcImpl } from "pbkit/core/runtime/rpc";
+import type { RpcClientImpl } from "pbkit/core/runtime/rpc";
 import { grpc } from "@improbable-eng/grpc-web";
 import { NodeHttpTransport } from "@improbable-eng/grpc-web-node-http-transport";
 
@@ -11,63 +11,54 @@ export interface CreateGrpcClientImplConfig {
   metadata: grpc.Metadata;
 }
 
+type RequestMetadata = any;
+type ResponseMetadata = any;
+type Response = any;
+
 export function createGrpcClientImpl(
   config: CreateGrpcClientImplConfig
-): RpcImpl<grpc.Metadata> {
-  return (servicePath, methodName, utilsFns) => {
+): RpcClientImpl<RequestMetadata, ResponseMetadata> {
+  return (methodDescriptor) => {
     return (req, metadata) => {
-      const grpcClient = grpc.client<any, any, any>(
-        {
-          service: {
-            serviceName: servicePath,
-          },
-          methodName: methodName,
-          requestStream: false,
-          responseStream: false,
-          responseType: {
-            deserializeBinary: utilsFns.decodeResponseBinary,
-          },
-        },
-        {
-          host: config.host,
-          debug: false,
-        }
-      );
-
-      type Response = any;
-      // let responseHeaders: grpc.Metadata | null = null;
-      // let responseMessage: Response | null = null;
-
-      // grpcClient.onHeaders((headers: grpc.Metadata) => {
-      //   responseHeaders = headers;
-      // });
+      const grpcClient = grpc.client<any, any, any>(methodDescriptor, {
+        host: config.host,
+        debug: false,
+      });
 
       const responseQueue: Response[] = [];
 
-      let resolve: ((v: Response) => void) | undefined = undefined;
+      let resolveResponse: ((v: Response) => void) | undefined = undefined;
 
       grpcClient.onMessage((res: Response) => {
-        console.log("onMessage", res);
-        if (resolve) {
-          resolve({
+        if (resolveResponse) {
+          resolveResponse({
             value: res,
             done: false,
           });
-          resolve = undefined;
+          resolveResponse = undefined;
         } else {
           responseQueue.push(res);
         }
       });
 
-      // grpcClient.onEnd((status, statusMessage, trailers) => {
-      // props.onEnd({
-      //   status: status,
-      //   statusMessage: statusMessage,
-      //   headers: responseHeaders ? responseHeaders : {},
-      //   message: responseMessage,
-      //   trailers: trailers,
-      // });
-      // });
+      const metadataPromise: Promise<ResponseMetadata> = new Promise(
+        (resolve) => {
+          let responseHeaders: grpc.Metadata | undefined = undefined;
+
+          grpcClient.onHeaders((headers: grpc.Metadata) => {
+            responseHeaders = headers;
+          });
+
+          grpcClient.onEnd((status, statusMessage, trailers) => {
+            resolve({
+              status: status,
+              statusMessage: statusMessage,
+              headers: responseHeaders ? responseHeaders : {},
+              trailers: trailers,
+            });
+          });
+        }
+      );
 
       const result = {
         [Symbol.asyncIterator]: () => result,
@@ -78,7 +69,9 @@ export function createGrpcClientImpl(
               done: false,
             });
           } else {
-            return new Promise<Response>((_resolve) => (resolve = _resolve));
+            return new Promise<Response>(
+              (_resolve) => (resolveResponse = _resolve)
+            );
           }
         },
         return: (value: Response) => {
@@ -91,18 +84,14 @@ export function createGrpcClientImpl(
 
       asyncForEach(req, (req) => {
         grpcClient.send({
-          serializeBinary: () => utilsFns.encodeRequestBinary(req),
+          serializeBinary: () =>
+            methodDescriptor.requestType.serializeBinary(req),
         });
       }).then(() => {
         grpcClient.finishSend();
       });
 
-      // return {
-      //   close: () => {
-      //     grpcClient.close();
-      //   }
-
-      return result;
+      return [result, metadataPromise];
     };
   };
 }

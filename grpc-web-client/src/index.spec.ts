@@ -14,7 +14,8 @@ describe("pingPongService", () => {
       createGrpcClientImpl({
         host: "http://localhost:8080",
         metadata: new grpc.Metadata(),
-      })
+      }),
+      { ignoreResMetadata: true }
     );
     const response = await pingPongService.pingPong({
       hello: "Ping",
