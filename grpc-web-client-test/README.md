@@ -1,1 +1,1 @@
-# Pbkit grpc web client
+# @pbkit/grpc-web-client-test

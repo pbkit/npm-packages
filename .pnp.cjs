@@ -1157,7 +1157,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@improbable-eng/grpc-web-node-http-transport", "virtual:adf004ac19947a6020ece7e5cd2a9b4590e9cd9457828f22323dd667e5c93169e93b0724d434ec87411d24b717a7e91a33089052ceee436351313b9854247321#npm:0.14.1"],
             ["@types/google-protobuf", "npm:3.15.5"],
             ["google-protobuf", "npm:3.18.0-rc.2"],
-            ["pbkit", "npm:0.0.16"],
+            ["pbkit", "npm:0.0.17"],
             ["typescript", "patch:typescript@npm%3A4.4.3#~builtin<compat/typescript>::version=4.4.3&hash=32657b"]
           ],
           "linkType": "SOFT",
@@ -4123,10 +4123,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["pbkit", [
-        ["npm:0.0.16", {
-          "packageLocation": "./.yarn/cache/pbkit-npm-0.0.16-2c55fda454-368c4a898c.zip/node_modules/pbkit/",
+        ["npm:0.0.17", {
+          "packageLocation": "./.yarn/cache/pbkit-npm-0.0.17-700e3d99a3-134d439db6.zip/node_modules/pbkit/",
           "packageDependencies": [
-            ["pbkit", "npm:0.0.16"]
+            ["pbkit", "npm:0.0.17"]
           ],
           "linkType": "HARD",
         }]

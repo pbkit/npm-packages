@@ -8,21 +8,23 @@ import "@pbkit/grpc-web-client/lib/node";
  * https://github.com/pbkit/pingpong-server
  */
 
-describe("pingPongService", () => {
-  it("pingPong", async () => {
-    const pingPongService = createServiceClient(
-      createGrpcClientImpl({
-        host: "http://localhost:8080",
-        metadata: {},
-      }),
-      { ignoreResMetadata: true }
-    );
-    const response = await pingPongService.pingPong({
-      hello: "Ping",
-    });
+const grpcServer = createGrpcClientImpl({
+  host: "http://localhost:8080",
+});
 
-    expect(response).toEqual({
-      world: "Pong",
-    });
+describe("PingPongService", () => {
+  it("ping pong", async () => {
+    const { pingPong } = createServiceClient(grpcServer);
+    const [response, _header, trailer] = await pingPong({ hello: "Ping" });
+    expect(response).toEqual({ world: "Pong" });
+    expect(await trailer).toMatchObject({ status: "0" });
+  });
+  it("response only", async () => {
+    const { pingPong } = createServiceClient(
+      grpcServer,
+      { responseOnly: true },
+    );
+    const response = await pingPong({ hello: "Ping" });
+    expect(response).toEqual({ world: "Pong" });
   });
 });
