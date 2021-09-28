@@ -1,6 +1,7 @@
 import { grpc } from "@improbable-eng/grpc-web";
 import { createGrpcClientImpl } from ".";
 import { createServiceClient } from "./gen/services/riiid/pingpong/PingPongService";
+import "./node";
 
 /**
  * if you run this test cases
