@@ -5,10 +5,8 @@
     "outDir": "lib",
     "declaration": true,
     "target": "ESNext",
-    "module": "commonjs",
+    "module": "ESNext",
     "strict": true,
     "allowSyntheticDefaultImports": true
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["lib", "src/**/*.spec.ts"]
+  }
 }

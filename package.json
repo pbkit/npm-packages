@@ -3,7 +3,8 @@
   "private": true,
   "packageManager": "yarn@3.0.2",
   "workspaces": [
-    "grpc-web-client"
+    "grpc-web-client",
+    "grpc-web-client-test"
   ],
   "devDependencies": {
     "typescript": "^4.4.3"

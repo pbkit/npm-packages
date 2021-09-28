@@ -1,10 +1,13 @@
 import type { RpcClientImpl } from "pbkit/core/runtime/rpc";
 import { grpc } from "@improbable-eng/grpc-web";
 
-type Metadata = grpc.Metadata;
+type Metadata = Record<string, string>;
 
 export interface ConfigMetadata {
-  [key: string]: string | (() => string) | (() => Promise<string>);
+  [key: string]:
+    | string
+    | (() => string | undefined)
+    | (() => Promise<string | undefined>);
 }
 export interface CreateGrpcClientImplConfig {
   host: string;
@@ -33,26 +36,23 @@ export function createGrpcClientImpl(
         }
       });
       const metadataPromise: Promise<Metadata> = new Promise((resolve) => {
-        let responseHeaders: Metadata | undefined = undefined;
-        grpcClient.onHeaders(
-          (headers: Metadata) => (responseHeaders = headers)
-        );
+        let responseHeaders: grpc.Metadata | undefined = undefined;
+        grpcClient.onHeaders((headers) => (responseHeaders = headers));
         grpcClient.onEnd((status, statusMessage, trailers) => {
-          const resultMetadata = mergeMetadata(responseHeaders, trailers);
-          resultMetadata.set("status", status.toString());
-          resultMetadata.set("statusMessage", statusMessage);
-          resolve(resultMetadata);
+          resolve({
+            ...grpcMetadataToRecord(responseHeaders),
+            ...grpcMetadataToRecord(trailers),
+            status: status.toString(),
+            statusMessage,
+          });
         });
       });
       (async () => {
-        const newMetadata = new grpc.Metadata(metadata);
+        const newMetadata = metadata ?? {};
         for (const [key, value] of Object.entries(config.metadata)) {
-          if (newMetadata.has(key)) continue;
-          if (typeof value === "string") {
-            newMetadata.append(key, value);
-          } else {
-            newMetadata.append(key, await value());
-          }
+          if (key in newMetadata) continue;
+          const v = typeof value === "string" ? value : await value();
+          if (v) newMetadata[key] = v;
         }
         grpcClient.start(newMetadata);
         for await (const value of req) {
@@ -72,9 +72,7 @@ export function createGrpcClientImpl(
               done: false,
             });
           } else {
-            return new Promise<Response>(
-              (_resolve) => (resolveResponse = _resolve)
-            );
+            return new Promise<Response>((r) => (resolveResponse = r));
           }
         },
         return: (value: Response) => Promise.resolve({ value, done: true }),
@@ -85,11 +83,8 @@ export function createGrpcClientImpl(
   };
 }
 
-function mergeMetadata(a?: Metadata, b?: Metadata) {
-  if (!a && !b) return new grpc.Metadata();
-  if (!a) return b!;
-  if (!b) return a!;
-  const newMetadata = new grpc.Metadata(a);
-  b.forEach((key, values) => newMetadata.append(key, values));
-  return newMetadata;
+function grpcMetadataToRecord(value?: grpc.Metadata): Record<string, string> {
+  const result: Record<string, string> = {};
+  value?.forEach((key, values) => (result[key] = values[values.length - 1]));
+  return result;
 }

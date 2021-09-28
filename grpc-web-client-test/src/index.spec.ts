@@ -1,7 +1,6 @@
-import { grpc } from "@improbable-eng/grpc-web";
-import { createGrpcClientImpl } from ".";
+import { createGrpcClientImpl } from "@pbkit/grpc-web-client";
 import { createServiceClient } from "./gen/services/riiid/pingpong/PingPongService";
-import "./node";
+import "@pbkit/grpc-web-client/lib/node";
 
 /**
  * if you run this test cases
@@ -14,7 +13,7 @@ describe("pingPongService", () => {
     const pingPongService = createServiceClient(
       createGrpcClientImpl({
         host: "http://localhost:8080",
-        metadata: new grpc.Metadata(),
+        metadata: {},
       }),
       { ignoreResMetadata: true }
     );
