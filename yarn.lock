@@ -701,7 +701,7 @@ __metadata:
     "@improbable-eng/grpc-web-node-http-transport": ^0.14.1
     "@types/google-protobuf": ^3.15.5
     google-protobuf: ^3.18.0-rc.2
-    pbkit: 0.0.17
+    pbkit: ^0.0.18
     typescript: ^4.4.3
   languageName: unknown
   linkType: soft
@@ -3264,13 +3264,6 @@ fsevents@^2.3.2:
   version: 1.0.7
   resolution: "path-parse@npm:1.0.7"
   checksum: 49abf3d81115642938a8700ec580da6e830dde670be21893c62f4e10bd7dd4c3742ddc603fe24f898cba7eb0c6bc1777f8d9ac14185d34540c6d4d80cd9cae8a
-  languageName: node
-  linkType: hard
-
-"pbkit@npm:0.0.17":
-  version: 0.0.17
-  resolution: "pbkit@npm:0.0.17"
-  checksum: 134d439db6e522e134fcdf7662d095aa34dc33b15c6cb3f84c078d97eb2437e0e859b21b872ea28ddebf06634243d81808b7c2777373b3a40ba68d3abef58220
   languageName: node
   linkType: hard
 

@@ -19,7 +19,7 @@
     "@improbable-eng/grpc-web": "^0.14.1",
     "@improbable-eng/grpc-web-node-http-transport": "^0.14.1",
     "google-protobuf": "^3.18.0-rc.2",
-    "pbkit": "0.0.17"
+    "pbkit": "^0.0.18"
   },
   "devDependencies": {
     "@types/google-protobuf": "^3.15.5",
