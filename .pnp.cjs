@@ -1172,6 +1172,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/jest", "npm:27.0.2"],
             ["jest", "virtual:fcfa35fc0e4abe20e20ffc049bd0d018176fb37ab5c50bff24040a1861ae633812ed7eae6bc1e5c556a73afd756f98928eea27bcd1fcc670b3c47d0bd06cd36a#npm:27.2.0"],
             ["jest-pnp-resolver", "virtual:fcfa35fc0e4abe20e20ffc049bd0d018176fb37ab5c50bff24040a1861ae633812ed7eae6bc1e5c556a73afd756f98928eea27bcd1fcc670b3c47d0bd06cd36a#npm:1.2.2"],
+            ["pbkit", "npm:0.0.18"],
             ["ts-jest", "virtual:fcfa35fc0e4abe20e20ffc049bd0d018176fb37ab5c50bff24040a1861ae633812ed7eae6bc1e5c556a73afd756f98928eea27bcd1fcc670b3c47d0bd06cd36a#npm:27.0.5"],
             ["typescript", "patch:typescript@npm%3A4.4.3#~builtin<compat/typescript>::version=4.4.3&hash=32657b"]
           ],
@@ -1258,6 +1259,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@types/babel__traverse", "npm:7.14.2"],
             ["@babel/types", "npm:7.15.6"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/emscripten", [
+        ["npm:1.39.5", {
+          "packageLocation": "./.yarn/cache/@types-emscripten-npm-1.39.5-ef4c55ba8e-cb92a99148.zip/node_modules/@types/emscripten/",
+          "packageDependencies": [
+            ["@types/emscripten", "npm:1.39.5"]
           ],
           "linkType": "HARD",
         }]
@@ -1363,6 +1373,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-yargs-parser-npm-20.2.1-2eed5b5c1c-1d039e6449.zip/node_modules/@types/yargs-parser/",
           "packageDependencies": [
             ["@types/yargs-parser", "npm:20.2.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@yarnpkg/fslib", [
+        ["npm:2.6.0-rc.8", {
+          "packageLocation": "./.yarn/cache/@yarnpkg-fslib-npm-2.6.0-rc.8-b73143d5bb-06130ba541.zip/node_modules/@yarnpkg/fslib/",
+          "packageDependencies": [
+            ["@yarnpkg/fslib", "npm:2.6.0-rc.8"],
+            ["@yarnpkg/libzip", "npm:2.2.2"],
+            ["tslib", "npm:1.14.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@yarnpkg/libzip", [
+        ["npm:2.2.2", {
+          "packageLocation": "./.yarn/cache/@yarnpkg-libzip-npm-2.2.2-3fa1ab5536-7c09b13fde.zip/node_modules/@yarnpkg/libzip/",
+          "packageDependencies": [
+            ["@yarnpkg/libzip", "npm:2.2.2"],
+            ["@types/emscripten", "npm:1.39.5"],
+            ["tslib", "npm:1.14.1"]
           ],
           "linkType": "HARD",
         }]
@@ -3854,6 +3886,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["mri", [
+        ["npm:1.2.0", {
+          "packageLocation": "./.yarn/cache/mri-npm-1.2.0-8ecee0357d-83f515abbc.zip/node_modules/mri/",
+          "packageDependencies": [
+            ["mri", "npm:1.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["ms", [
         ["npm:2.1.2", {
           "packageLocation": "./.yarn/cache/ms-npm-2.1.2-ec0c1512ff-673cdb2c31.zip/node_modules/ms/",
@@ -4127,6 +4168,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/pbkit-npm-0.0.17-700e3d99a3-134d439db6.zip/node_modules/pbkit/",
           "packageDependencies": [
             ["pbkit", "npm:0.0.17"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:0.0.18", {
+          "packageLocation": "./.yarn/unplugged/pbkit-npm-0.0.18-9649e6acbf/node_modules/pbkit/",
+          "packageDependencies": [
+            ["pbkit", "npm:0.0.18"],
+            ["@yarnpkg/fslib", "npm:2.6.0-rc.8"],
+            ["@yarnpkg/libzip", "npm:2.2.2"],
+            ["mri", "npm:1.2.0"]
           ],
           "linkType": "HARD",
         }]
@@ -4818,6 +4869,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "babel-jest",
             "jest",
             "typescript"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["tslib", [
+        ["npm:1.14.1", {
+          "packageLocation": "./.yarn/cache/tslib-npm-1.14.1-102499115e-dbe628ef87.zip/node_modules/tslib/",
+          "packageDependencies": [
+            ["tslib", "npm:1.14.1"]
           ],
           "linkType": "HARD",
         }]

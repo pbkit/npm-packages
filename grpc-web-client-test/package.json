@@ -12,12 +12,13 @@
     "clean:pb": "rm -rf gen",
     "build": "yarn build:pollapo && yarn build:pb",
     "build:pollapo": "pollapo install",
-    "build:pb": "pb gen ts -o src/gen --proto-path .pollapo --remove-ts-file-extension-in-import-statement pbkit/interface-pingpong-server/pingpong.proto",
+    "build:pb": "pb-gen-ts -o src/gen --entry-path .pollapo",
     "test": "yarn jest",
     "test:watch": "yarn test --watch"
   },
   "dependencies": {
-    "@pbkit/grpc-web-client": "workspace:grpc-web-client"
+    "@pbkit/grpc-web-client": "workspace:grpc-web-client",
+    "pbkit": "^0.0.18"
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",

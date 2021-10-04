@@ -687,6 +687,7 @@ __metadata:
     "@types/jest": ^27.0.2
     jest: ^27.2.0
     jest-pnp-resolver: ^1.2.2
+    pbkit: ^0.0.18
     ts-jest: ^27.0.2
     typescript: ^4.4.3
   languageName: unknown
@@ -779,6 +780,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/emscripten@npm:^1.38.0":
+  version: 1.39.5
+  resolution: "@types/emscripten@npm:1.39.5"
+  checksum: cb92a991485164fa919f78f104253511f62c8e8ad0b2b9816a0660a092ec2df8606243beb84f380fef2058c764b4bc47c28d99b5fb9da5dc163b8d903f686cc9
+  languageName: node
+  linkType: hard
+
 "@types/google-protobuf@npm:^3.15.5":
   version: 3.15.5
   resolution: "@types/google-protobuf@npm:3.15.5"
@@ -864,6 +872,26 @@ __metadata:
   dependencies:
     "@types/yargs-parser": "*"
   checksum: caa21d2c957592fe2184a8368c8cbe5a82a6c2e2f2893722e489f842dc5963293d2f3120bc06fe3933d60a3a0d1e2eb269649fd6b1947fe1820f8841ba611dd9
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/fslib@npm:^2.6.0-rc.8":
+  version: 2.6.0-rc.8
+  resolution: "@yarnpkg/fslib@npm:2.6.0-rc.8"
+  dependencies:
+    "@yarnpkg/libzip": ^2.2.2
+    tslib: ^1.13.0
+  checksum: 06130ba541d8a504567a761e216b5a470d9af7a94f55bc1e3b3ef7e2276ff1fdb3d7cd1e6aef95fe1b7629a68459bc068094d29a064622247e03169e4998a58e
+  languageName: node
+  linkType: hard
+
+"@yarnpkg/libzip@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "@yarnpkg/libzip@npm:2.2.2"
+  dependencies:
+    "@types/emscripten": ^1.38.0
+    tslib: ^1.13.0
+  checksum: 7c09b13fdea1aa35959f3d8a17341ea3abc7b9708b731cff126c361582148a97555cda865bf0aaaefafae22bfeb95df218bd20ad1565ced68cc95402e554659f
   languageName: node
   linkType: hard
 
@@ -3002,6 +3030,13 @@ fsevents@^2.3.2:
   languageName: node
   linkType: hard
 
+"mri@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "mri@npm:1.2.0"
+  checksum: 83f515abbcff60150873e424894a2f65d68037e5a7fcde8a9e2b285ee9c13ac581b63cfc1e6826c4732de3aeb84902f7c1e16b7aff46cd3f897a0f757a894e85
+  languageName: node
+  linkType: hard
+
 "ms@npm:2.1.2":
   version: 2.1.2
   resolution: "ms@npm:2.1.2"
@@ -3236,6 +3271,19 @@ fsevents@^2.3.2:
   version: 0.0.17
   resolution: "pbkit@npm:0.0.17"
   checksum: 134d439db6e522e134fcdf7662d095aa34dc33b15c6cb3f84c078d97eb2437e0e859b21b872ea28ddebf06634243d81808b7c2777373b3a40ba68d3abef58220
+  languageName: node
+  linkType: hard
+
+"pbkit@npm:^0.0.18":
+  version: 0.0.18
+  resolution: "pbkit@npm:0.0.18"
+  dependencies:
+    "@yarnpkg/fslib": ^2.6.0-rc.8
+    "@yarnpkg/libzip": ^2.2.2
+    mri: ^1.2.0
+  bin:
+    pb-gen-ts: node/cli/pb-gen-ts.js
+  checksum: c3354f0fc2b9056729178e96ac7c936278f3f5775baf2a2f065cb72303040d7701bd1aea3d5f4a93c5cbd3470fd9514915537e1c47a431e1d621c9bf74cf1ed7
   languageName: node
   linkType: hard
 
@@ -3847,6 +3895,13 @@ resolve@^1.20.0:
   bin:
     ts-jest: cli.js
   checksum: fd53cdb6f913cbe802799d2b491f70f33c52c840c4b8483cecf600ff360efbd00c8d7ed9eb0dd677219f330ee38928b7b9890e9853e9f4d3574b9d8e1dcf4a30
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^1.13.0":
+  version: 1.14.1
+  resolution: "tslib@npm:1.14.1"
+  checksum: dbe628ef87f66691d5d2959b3e41b9ca0045c3ee3c7c7b906cc1e328b39f199bb1ad9e671c39025bd56122ac57dfbf7385a94843b1cc07c60a4db74795829acd
   languageName: node
   linkType: hard
 
