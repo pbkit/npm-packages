@@ -1,4 +1,4 @@
-import type { RpcClientImpl } from "pbkit/core/runtime/rpc";
+import type { RpcClientImpl } from "@pbkit/runtime/rpc";
 import { grpc } from "@improbable-eng/grpc-web";
 
 export type Metadata = Record<string, string>;
