@@ -1,7 +1,7 @@
 {
   "name": "@pbkit/grpc-web-client",
   "packageManager": "yarn@3.0.2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "pbkit grpc web client",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

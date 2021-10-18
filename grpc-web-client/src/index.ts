@@ -1,4 +1,6 @@
 import type { RpcClientImpl } from "@pbkit/runtime/rpc";
+import { createEventBuffer } from "@pbkit/runtime/async/event-buffer";
+import { defer } from "@pbkit/runtime/async/observer";
 import { grpc } from "@improbable-eng/grpc-web";
 
 export type Metadata = Record<string, string>;
@@ -23,31 +25,30 @@ export function createGrpcClientImpl(
 ): RpcClientImpl<Metadata, Header, Trailer> {
   return (methodDescriptor) => {
     return (req, metadata) => {
+      const headerPromise = defer<Header>();
+      const trailerPromise = defer<Trailer>();
+      const eventBuffer = createEventBuffer<Response>({
+        onDrainEnd() {
+          grpcClient.close();
+          headerPromise.reject();
+          trailerPromise.reject();
+        },
+      });
       const grpcClient = grpc.client<any, any, any>(methodDescriptor, {
         host: config.host,
         debug: false,
       });
-      const responseQueue: Response[] = [];
-      let resolveResponse: ((v: Response) => void) | undefined = undefined;
-      grpcClient.onMessage((res: Response) => {
-        if (resolveResponse) {
-          resolveResponse({ value: res, done: false });
-          resolveResponse = undefined;
-        } else {
-          responseQueue.push(res);
-        }
+      grpcClient.onHeaders((header) => {
+        headerPromise.resolve(grpcMetadataToRecord(header));
       });
-      const headerPromise: Promise<Header> = new Promise((resolve) => {
-        grpcClient.onHeaders((header) => resolve(grpcMetadataToRecord(header)));
-      });
-      const trailerPromise: Promise<Trailer> = new Promise((resolve) => {
-        grpcClient.onEnd(async (status, statusMessage, trailer) => {
-          resolve({
-            ...grpcMetadataToRecord(trailer),
-            status: status.toString(),
-            statusMessage,
-          });
+      grpcClient.onMessage(eventBuffer.push);
+      grpcClient.onEnd((status, statusMessage, trailer) => {
+        trailerPromise.resolve({
+          ...grpcMetadataToRecord(trailer),
+          status: status.toString(),
+          statusMessage,
         });
+        eventBuffer.finish();
       });
       (async () => {
         const m = { ...metadata };
@@ -67,22 +68,7 @@ export function createGrpcClientImpl(
         }
         grpcClient.finishSend();
       })();
-      const result = {
-        [Symbol.asyncIterator]: () => result,
-        next: function () {
-          if (responseQueue.length > 0) {
-            return Promise.resolve({
-              value: responseQueue.shift(),
-              done: false,
-            });
-          } else {
-            return new Promise<Response>((r) => (resolveResponse = r));
-          }
-        },
-        return: (value: Response) => Promise.resolve({ value, done: true }),
-        throw: (error: any) => Promise.reject(error),
-      };
-      return [result, headerPromise, trailerPromise];
+      return [eventBuffer.drain(), headerPromise, trailerPromise];
     };
   };
 }
