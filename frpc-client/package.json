@@ -1,0 +1,26 @@
+{
+  "name": "@pbkit/frpc-client",
+  "packageManager": "yarn@3.0.2",
+  "version": "0.0.0",
+  "description": "pbkit frpc client",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": "git@github.com:pbkit/npm-packages.git",
+  "author": "JongChan Choi <jong@chan.moe>",
+  "license": "(MIT OR Apache-2.0)",
+  "scripts": {
+    "clean": "rm -rf lib",
+    "build": "tsc"
+  },
+  "files": [
+    "/lib/**/*"
+  ],
+  "dependencies": {
+    "@pbkit/runtime": "^0.0.19",
+    "bl": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/bl": "^5.0.2",
+    "typescript": "^4.4.3"
+  }
+}
