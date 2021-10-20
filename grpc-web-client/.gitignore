@@ -1,4 +1,2 @@
-.pollapo/*
-lib/*
-coverage/*
-src/gen/*
+lib/
+src/gen/

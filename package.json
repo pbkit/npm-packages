@@ -4,6 +4,7 @@
   "packageManager": "yarn@3.0.2",
   "workspaces": [
     "frpc-client",
+    "frpc-server",
     "grpc-web-client",
     "grpc-web-client-test"
   ],
