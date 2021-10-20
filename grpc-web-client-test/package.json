@@ -3,7 +3,7 @@
   "packageManager": "yarn@3.0.2",
   "version": "0.0.0",
   "description": "pbkit grpc web client",
-  "repository": "git@github.com:pbkit/node-grpc-web-client.git",
+  "repository": "git@github.com:pbkit/npm-packages.git",
   "author": "JongChan Choi <jong@chan.moe>",
   "license": "(MIT OR Apache-2.0)",
   "scripts": {

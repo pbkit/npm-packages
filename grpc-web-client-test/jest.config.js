@@ -1,5 +1,4 @@
 module.exports = {
-  coverageDirectory: "coverage",
   moduleNameMapper: {},
   resolver: require.resolve(`jest-pnp-resolver`),
   setupFilesAfterEnv: [],
