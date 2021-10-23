@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@types/bl": "^5.0.2",
+    "@types/node": "^16.11.4",
     "typescript": "^4.4.3"
   }
 }

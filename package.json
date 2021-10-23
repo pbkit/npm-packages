@@ -5,6 +5,7 @@
   "workspaces": [
     "frpc-client",
     "frpc-server",
+    "frpc-test",
     "grpc-web-client",
     "grpc-web-client-test"
   ],

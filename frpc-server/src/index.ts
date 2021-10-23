@@ -1,12 +1,12 @@
 import fastify from "fastify";
 import type {
-  FastifyInstance,
-  FastifyHttp2SecureOptions,
   FastifyHttp2Options,
+  FastifyHttp2SecureOptions,
   FastifyHttpsOptions,
-  FastifyServerOptions,
-  FastifyRequest,
+  FastifyInstance,
   FastifyReply,
+  FastifyRequest,
+  FastifyServerOptions,
 } from "fastify";
 import type { Method } from "@pbkit/runtime/rpc";
 import { createEventBuffer } from "@pbkit/runtime/async/event-buffer";
@@ -31,7 +31,7 @@ interface CreateFrpcServerConfigWithFastifyInstance
 }
 interface CreateFrpcServerConfigWithFastifyConfig
   extends CreateFrpcServerConfigBase {
-  fastifyConfig: FastifyConfig;
+  fastifyConfig?: FastifyConfig;
 }
 type FastifyConfig =
   | FastifyHttp2SecureOptions<any>
@@ -42,15 +42,14 @@ export type CreateFrpcServerConfig =
   | CreateFrpcServerConfigWithFastifyInstance
   | CreateFrpcServerConfigWithFastifyConfig;
 export async function createFrpcServer(config: CreateFrpcServerConfig) {
-  const fastifyInstance =
-    "fastifyInstance" in config
-      ? config.fastifyInstance
-      : "fastifyConfig" in config
-      ? fastify(config.fastifyConfig)
-      : fastify();
+  const fastifyInstance = "fastifyInstance" in config
+    ? config.fastifyInstance
+    : "fastifyConfig" in config
+    ? fastify(config.fastifyConfig)
+    : fastify();
   fastifyInstance.addContentTypeParser(
     "application/frpc+proto",
-    (_request, _payload, done) => done(null)
+    (_request, _payload, done) => done(null),
   );
   for await (const [methodDescriptor, methodImpl] of config.methods) {
     const {
@@ -64,12 +63,15 @@ export async function createFrpcServer(config: CreateFrpcServerConfig) {
       url: `/${config.pathPrefix ?? ""}${serviceName}/${methodName}`,
       handler: async (request, reply) => {
         const eventBuffer = createEventBuffer();
-        const destroy = () => request.raw.destroy();
+        const destroy = () => {
+          request.raw.destroy();
+          eventBuffer.finish();
+        };
         request.raw.on(
           "data",
           createMessageBuffer((message) => {
             eventBuffer.push(requestType.deserializeBinary(message));
-          }, noop)
+          }, noop),
         );
         request.raw.on("close", destroy);
         request.raw.on("error", destroy);

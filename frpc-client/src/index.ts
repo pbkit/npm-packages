@@ -1,4 +1,5 @@
-import BufferList from "bl/BufferList";
+import type { Readable } from "stream";
+import BufferList = require("bl/BufferList");
 import type { RpcClientImpl } from "@pbkit/runtime/rpc";
 import { first } from "@pbkit/runtime/async/async-generator";
 import { createEventBuffer } from "@pbkit/runtime/async/event-buffer";
@@ -40,6 +41,7 @@ export function createFrpcClientImpl(
       });
       const trailer: Trailer = {};
       const collect = createMessageBuffer(
+        methodDescriptor.responseType.deserializeBinary,
         eventBuffer.push,
         (key, value) => (trailer[key] = value),
       );
@@ -66,18 +68,29 @@ export function createFrpcClientImpl(
           body,
         });
         headerPromise.resolve(headersToRecord(res.headers));
-        const reader = res.body!.getReader();
-        while (true) {
-          if (drainEnded) {
-            reader.cancel();
-            break;
+        const resBody = res.body!;
+        if (!resBody.getReader) { // node-fetch
+          const reader = resBody as unknown as Readable;
+          reader.on("data", collect);
+          reader.on("close", () => {
+            trailerPromise.resolve(trailer);
+            eventBuffer.finish();
+          });
+        } else {
+          const reader = resBody.getReader();
+          while (true) {
+            console.log({ drainEnded });
+            if (drainEnded) {
+              reader.cancel();
+              break;
+            }
+            const { done, value } = await reader.read();
+            if (value) collect(value);
+            if (done) break;
           }
-          const { done, value } = await reader.read();
-          if (value) collect(value);
-          if (done) break;
+          trailerPromise.resolve(trailer);
+          eventBuffer.finish();
         }
-        trailerPromise.resolve(trailer);
-        eventBuffer.finish();
       });
       return [eventBuffer.drain(), headerPromise, trailerPromise];
     };

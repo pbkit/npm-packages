@@ -1,4 +1,4 @@
-import BufferList from "bl/BufferList";
+import BufferList = require("bl/BufferList");
 
 export interface CreateMessageBuffer {
   (
@@ -12,7 +12,7 @@ export const createMessageBuffer: CreateMessageBuffer = (
 ) => {
   const bl = new BufferList();
   return (chunk) => {
-    bl.append(Buffer.from(chunk.buffer));
+    bl.append(chunk as Buffer);
     while (bl.length >= 5) {
       const type = bl.readUInt8(0);
       const length = bl.readUInt32LE(1);

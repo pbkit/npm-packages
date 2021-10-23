@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@pbkit/grpc-web-client": "workspace:grpc-web-client",
-    "pbkit": "^0.0.18"
+    "pbkit": "^0.0.20"
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",
