@@ -1,40 +1,14 @@
 import fetch from "node-fetch";
 import { first } from "pbkit/core/runtime/async/async-generator";
-import { createEventBuffer } from "pbkit/core/runtime/async/event-buffer";
-import {
-  getMethodImpl,
-  Method,
-  MethodDescriptor,
-  MethodImplHandler,
-} from "pbkit/core/runtime/rpc";
 import {
   createFrpcServer,
-  Header,
-  Metadata,
-  Trailer,
+  createFrpcServerImplBuilder,
 } from "@pbkit/frpc-server";
 import { createFrpcClientImpl } from "@pbkit/frpc-client";
 import {
   createServiceClient,
   methodDescriptors,
 } from "./gen/services/riiid/pingpong/PingPongService";
-
-function createFrpcServerImplBuilder() {
-  return createServerImplBuilder<Metadata, Header, Trailer>();
-}
-function createServerImplBuilder<TMetadata, THeader, TTrailer>() {
-  const buffer = createEventBuffer<Method<TMetadata, THeader, TTrailer>>();
-  return {
-    register<TReq, TRes>(
-      methodDescriptor: MethodDescriptor<TReq, TRes>,
-      handler: MethodImplHandler<TReq, TRes, TMetadata, THeader, TTrailer>,
-    ) {
-      buffer.push([methodDescriptor, getMethodImpl(handler)]);
-    },
-    finish: buffer.finish,
-    drain: buffer.drain,
-  };
-}
 
 describe("PingPongService", () => {
   it("ping pong", async () => {

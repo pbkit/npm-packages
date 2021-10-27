@@ -9,6 +9,7 @@ import type {
   FastifyServerOptions,
 } from "fastify";
 import type { Method } from "@pbkit/runtime/rpc";
+import { createServerImplBuilder } from "@pbkit/runtime/rpc";
 import { createEventBuffer } from "@pbkit/runtime/async/event-buffer";
 import createMessageBuffer from "./messageBuffer";
 
@@ -100,6 +101,10 @@ export async function createFrpcServer(config: CreateFrpcServerConfig) {
     });
   }
   return fastifyInstance;
+}
+
+export function createFrpcServerImplBuilder() {
+  return createServerImplBuilder<Metadata, Header, Trailer>();
 }
 
 const noop = () => {};

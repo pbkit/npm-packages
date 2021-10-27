@@ -1178,7 +1178,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./frpc-client/",
           "packageDependencies": [
             ["@pbkit/frpc-client", "workspace:frpc-client"],
-            ["@pbkit/runtime", "npm:0.0.19"],
+            ["@pbkit/runtime", "npm:0.0.21"],
             ["@types/bl", "npm:5.0.2"],
             ["@types/node", "npm:16.11.4"],
             ["bl", "npm:5.0.0"],
@@ -1192,7 +1192,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/__virtual__/@pbkit-frpc-server-virtual-195ce55046/1/frpc-server/",
           "packageDependencies": [
             ["@pbkit/frpc-server", "virtual:d9bd61fbc70f2543f22877fc34a8b6d66c469c019d5a73ebd09c80ab87d2ad9856eb4249721020cf7694128202329e514cd9cb5cec16073b24a26f18e16bbe9d#workspace:frpc-server"],
-            ["@pbkit/runtime", "npm:0.0.19"],
+            ["@pbkit/runtime", "npm:0.0.21"],
             ["@types/bl", "npm:5.0.2"],
             ["@types/fastify", null],
             ["@types/node", "npm:16.11.1"],
@@ -1209,7 +1209,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./frpc-server/",
           "packageDependencies": [
             ["@pbkit/frpc-server", "workspace:frpc-server"],
-            ["@pbkit/runtime", "npm:0.0.19"],
+            ["@pbkit/runtime", "npm:0.0.21"],
             ["@types/bl", "npm:5.0.2"],
             ["@types/node", "npm:16.11.1"],
             ["bl", "npm:5.0.0"],
@@ -1232,7 +1232,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest", "virtual:d9bd61fbc70f2543f22877fc34a8b6d66c469c019d5a73ebd09c80ab87d2ad9856eb4249721020cf7694128202329e514cd9cb5cec16073b24a26f18e16bbe9d#npm:27.2.0"],
             ["jest-pnp-resolver", "virtual:d9bd61fbc70f2543f22877fc34a8b6d66c469c019d5a73ebd09c80ab87d2ad9856eb4249721020cf7694128202329e514cd9cb5cec16073b24a26f18e16bbe9d#npm:1.2.2"],
             ["node-fetch", "npm:2.6.5"],
-            ["pbkit", "npm:0.0.20"],
+            ["pbkit", "npm:0.0.21"],
             ["ts-jest", "virtual:d9bd61fbc70f2543f22877fc34a8b6d66c469c019d5a73ebd09c80ab87d2ad9856eb4249721020cf7694128202329e514cd9cb5cec16073b24a26f18e16bbe9d#npm:27.0.5"],
             ["typescript", "patch:typescript@npm%3A4.4.3#~builtin<compat/typescript>::version=4.4.3&hash=32657b"]
           ],
@@ -1285,6 +1285,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@pbkit-runtime-npm-0.0.19-170387cdab-e8c4578d45.zip/node_modules/@pbkit/runtime/",
           "packageDependencies": [
             ["@pbkit/runtime", "npm:0.0.19"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:0.0.21", {
+          "packageLocation": "./.yarn/cache/@pbkit-runtime-npm-0.0.21-64eade56d9-0f7eaa56d1.zip/node_modules/@pbkit/runtime/",
+          "packageDependencies": [
+            ["@pbkit/runtime", "npm:0.0.21"]
           ],
           "linkType": "HARD",
         }]
@@ -4618,6 +4625,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/unplugged/pbkit-npm-0.0.20-4c50cbbf9a/node_modules/pbkit/",
           "packageDependencies": [
             ["pbkit", "npm:0.0.20"],
+            ["@yarnpkg/fslib", "npm:2.6.0-rc.8"],
+            ["@yarnpkg/libzip", "npm:2.2.2"],
+            ["core-js", "npm:3.18.1"],
+            ["mri", "npm:1.2.0"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:0.0.21", {
+          "packageLocation": "./.yarn/unplugged/pbkit-npm-0.0.21-fdf29e0e6a/node_modules/pbkit/",
+          "packageDependencies": [
+            ["pbkit", "npm:0.0.21"],
             ["@yarnpkg/fslib", "npm:2.6.0-rc.8"],
             ["@yarnpkg/libzip", "npm:2.2.2"],
             ["core-js", "npm:3.18.1"],

@@ -16,7 +16,7 @@
     "/lib/**/*"
   ],
   "dependencies": {
-    "@pbkit/runtime": "^0.0.19",
+    "@pbkit/runtime": "^0.0.21",
     "bl": "^5.0.0"
   },
   "peerDependencies": {

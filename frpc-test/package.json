@@ -26,7 +26,7 @@
     "jest": "^27.2.0",
     "jest-pnp-resolver": "^1.2.2",
     "node-fetch": "^2",
-    "pbkit": "^0.0.20",
+    "pbkit": "^0.0.21",
     "ts-jest": "^27.0.2",
     "typescript": "^4.4.3"
   }
