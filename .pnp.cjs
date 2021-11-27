@@ -1246,7 +1246,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@pbkit/grpc-web-client", "workspace:grpc-web-client"],
             ["@improbable-eng/grpc-web", "virtual:adf004ac19947a6020ece7e5cd2a9b4590e9cd9457828f22323dd667e5c93169e93b0724d434ec87411d24b717a7e91a33089052ceee436351313b9854247321#npm:0.14.1"],
             ["@improbable-eng/grpc-web-node-http-transport", "virtual:adf004ac19947a6020ece7e5cd2a9b4590e9cd9457828f22323dd667e5c93169e93b0724d434ec87411d24b717a7e91a33089052ceee436351313b9854247321#npm:0.14.1"],
-            ["@pbkit/runtime", "npm:0.0.19"],
+            ["@pbkit/runtime", "npm:0.0.21"],
             ["@types/google-protobuf", "npm:3.15.5"],
             ["google-protobuf", "npm:3.18.0-rc.2"],
             ["typescript", "patch:typescript@npm%3A4.4.3#~builtin<compat/typescript>::version=4.4.3&hash=32657b"]
@@ -1281,13 +1281,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@pbkit/runtime", [
-        ["npm:0.0.19", {
-          "packageLocation": "./.yarn/cache/@pbkit-runtime-npm-0.0.19-170387cdab-e8c4578d45.zip/node_modules/@pbkit/runtime/",
-          "packageDependencies": [
-            ["@pbkit/runtime", "npm:0.0.19"]
-          ],
-          "linkType": "HARD",
-        }],
         ["npm:0.0.21", {
           "packageLocation": "./.yarn/cache/@pbkit-runtime-npm-0.0.21-64eade56d9-0f7eaa56d1.zip/node_modules/@pbkit/runtime/",
           "packageDependencies": [

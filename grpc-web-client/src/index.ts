@@ -13,7 +13,7 @@ export interface ConfigMetadata {
     | (() => string | undefined)
     | (() => Promise<string | undefined>);
 }
-export interface CreateGrpcClientImplConfig {
+export interface CreateGrpcWebClientImplConfig {
   host: string;
   metadata?: ConfigMetadata;
 }
@@ -41,7 +41,7 @@ export enum Status {
 type Response = any;
 
 export function createGrpcWebClientImpl(
-  config: CreateGrpcClientImplConfig
+  config: CreateGrpcWebClientImplConfig
 ): RpcClientImpl<Metadata, Header, Trailer> {
   return (methodDescriptor) => {
     const isServerStreamOrBidi = methodDescriptor.responseStream;

@@ -753,7 +753,7 @@ __metadata:
   dependencies:
     "@improbable-eng/grpc-web": ^0.14.1
     "@improbable-eng/grpc-web-node-http-transport": ^0.14.1
-    "@pbkit/runtime": ^0.0.19
+    "@pbkit/runtime": ^0.0.21
     "@types/google-protobuf": ^3.15.5
     google-protobuf: ^3.18.0-rc.2
     typescript: ^4.4.3
@@ -767,13 +767,6 @@ __metadata:
     typescript: ^4.4.3
   languageName: unknown
   linkType: soft
-
-"@pbkit/runtime@npm:^0.0.19":
-  version: 0.0.19
-  resolution: "@pbkit/runtime@npm:0.0.19"
-  checksum: e8c4578d455219cd13edfd93766c7715487a1f67547d532c531936504493e6ffd43f618b3687ccde5c0944958f1429cc4ea85fcb2053d91ca2206a896e1b0abe
-  languageName: node
-  linkType: hard
 
 "@pbkit/runtime@npm:^0.0.21":
   version: 0.0.21
