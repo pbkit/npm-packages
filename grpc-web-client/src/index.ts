@@ -38,6 +38,12 @@ export enum Status {
   UNAUTHENTICATED = "16",
 }
 
+export class GrpcWebError extends Error {
+  constructor(public status: Status, message: string) {
+    super(message);
+  }
+}
+
 type Response = any;
 
 export function createGrpcWebClientImpl(
@@ -69,13 +75,18 @@ export function createGrpcWebClientImpl(
         headerPromise.resolve(grpcMetadataToRecord(header));
       });
       grpcClient.onMessage(eventBuffer.push);
-      grpcClient.onEnd((status, statusMessage, trailer) => {
+      grpcClient.onEnd((_status, statusMessage, trailer) => {
+        const status = String(_status) as Status;
+        if (_status > grpc.Code.Canceled) {
+          eventBuffer.error(new GrpcWebError(status, statusMessage));
+        } else {
+          eventBuffer.finish();
+        }
         trailerPromise.resolve({
           ...grpcMetadataToRecord(trailer),
-          status: status.toString() as Status,
+          status,
           statusMessage,
         });
-        eventBuffer.finish();
       });
       (async () => {
         const m = { ...metadata };

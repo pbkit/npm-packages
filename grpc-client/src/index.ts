@@ -94,6 +94,13 @@ export function createGrpcClientImpl(
           headerPromise.resolve(grpcMetadataToRecord(header));
         });
         call.on("data", eventBuffer.push);
+        call.on("error", (error) => {
+          eventBuffer.error(error);
+          trailerPromise.resolve({
+            status: Status.UNKNOWN,
+            statusMessage: error.message,
+          });
+        });
         call.on("status", ({ code, details, metadata }) => {
           trailerPromise.resolve({
             ...grpcMetadataToRecord(metadata),

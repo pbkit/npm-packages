@@ -1,7 +1,7 @@
 {
   "name": "@pbkit/grpc-web-client",
   "packageManager": "yarn@3.1.1",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "pbkit grpc web client",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -18,7 +18,7 @@
   "dependencies": {
     "@improbable-eng/grpc-web": "^0.14.1",
     "@improbable-eng/grpc-web-node-http-transport": "^0.14.1",
-    "@pbkit/runtime": "^0.0.21",
+    "@pbkit/runtime": "^0.0.35",
     "google-protobuf": "^3.18.0-rc.2"
   },
   "devDependencies": {

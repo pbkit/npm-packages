@@ -763,7 +763,7 @@ __metadata:
   resolution: "@pbkit/grpc-client@workspace:grpc-client"
   dependencies:
     "@grpc/grpc-js": ^1.4.4
-    "@pbkit/runtime": ^0.0.21
+    "@pbkit/runtime": ^0.0.35
     "@types/long": ^4.0.1
     "@types/node": ^16.11.10
     typescript: ^4.4.3
@@ -792,7 +792,7 @@ __metadata:
   dependencies:
     "@improbable-eng/grpc-web": ^0.14.1
     "@improbable-eng/grpc-web-node-http-transport": ^0.14.1
-    "@pbkit/runtime": ^0.0.21
+    "@pbkit/runtime": ^0.0.35
     "@types/google-protobuf": ^3.15.5
     google-protobuf: ^3.18.0-rc.2
     typescript: ^4.4.3
@@ -811,6 +811,13 @@ __metadata:
   version: 0.0.21
   resolution: "@pbkit/runtime@npm:0.0.21"
   checksum: 0f7eaa56d123d04d9c5b9daf6ba9526d273124be11fec3e4aa72f0d5cf62b8f7eaaa32a1d28c8f91eaa2dd739ea6977c2a3814f2e8ad2d48e62de15c62784028
+  languageName: node
+  linkType: hard
+
+"@pbkit/runtime@npm:^0.0.35":
+  version: 0.0.35
+  resolution: "@pbkit/runtime@npm:0.0.35"
+  checksum: 33893bedb598173ec8e6b896187576afabec4d118bce2ed8f8e06494e3ac444338903ddd13c55dc5dc7f2ae7c5e7d357c924511ceb932533694302d7eff9703a
   languageName: node
   linkType: hard
 

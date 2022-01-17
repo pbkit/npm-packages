@@ -1,7 +1,7 @@
 {
   "name": "@pbkit/grpc-client",
   "packageManager": "yarn@3.1.1",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "pbkit grpc web client",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -16,7 +16,7 @@
     "/lib/**/*"
   ],
   "dependencies": {
-    "@pbkit/runtime": "^0.0.21"
+    "@pbkit/runtime": "^0.0.35"
   },
   "devDependencies": {
     "@grpc/grpc-js": "^1.4.4",
