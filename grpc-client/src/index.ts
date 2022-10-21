@@ -40,7 +40,10 @@ export enum Status {
 
 type Response = any;
 
-export function createGrpcJsClient(host: string, credentials: grpc.ChannelCredentials = grpc.credentials.createInsecure()): grpc.Client {
+export function createGrpcJsClient(
+  host: string,
+  credentials: grpc.ChannelCredentials = grpc.credentials.createInsecure()
+): grpc.Client {
   return new grpc.Client(host, credentials);
 }
 
