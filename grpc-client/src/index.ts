@@ -42,13 +42,13 @@ type Response = any;
 
 export function createGrpcJsClient(
   host: string,
-  credentials: grpc.ChannelCredentials = grpc.credentials.createInsecure()
+  credentials: grpc.ChannelCredentials = grpc.credentials.createInsecure(),
 ): grpc.Client {
   return new grpc.Client(host, credentials);
 }
 
 export function createGrpcClientImpl(
-  config: CreateGrpcClientImplConfig
+  config: CreateGrpcClientImplConfig,
 ): RpcClientImpl<Metadata, Header, Trailer> {
   const grpcJsClient = config.grpcJsClient;
   return (methodDescriptor) => {
@@ -72,11 +72,11 @@ export function createGrpcClientImpl(
       const eventBuffer = createEventBuffer<Response>({
         onDrainEnd: isServerStreamOrBidi
           ? () => {
-              call.cancel();
-              call.end();
-              headerPromise.reject("Drain ended before receive header");
-              trailerPromise.resolve(trailerWhenDrainEnded);
-            }
+            call.cancel();
+            call.end();
+            headerPromise.reject("Drain ended before receive header");
+            trailerPromise.resolve(trailerWhenDrainEnded);
+          }
           : undefined,
       });
       (async () => {
@@ -88,10 +88,15 @@ export function createGrpcClientImpl(
             if (v) m[key] = v;
           }
         }
+        const grpcMetadata = new grpc.Metadata();
+        for (const [key, value] of Object.entries(m)) {
+          grpcMetadata.set(key, value);
+        }
         call = grpcJsClient.makeBidiStreamRequest(
           path,
           (req) => Buffer.from(requestType.serializeBinary(req)),
-          responseType.deserializeBinary
+          responseType.deserializeBinary,
+          grpcMetadata,
         );
         call.on("metadata", (header) => {
           headerPromise.resolve(grpcMetadataToRecord(header));
